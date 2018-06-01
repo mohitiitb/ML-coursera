@@ -36,8 +36,17 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
-
-
+hypothesis = sigmoid(X*theta);
+cost_vector = (-y).*(log(hypothesis)) - (1-y).*(log(1- hypothesis));
+J = (sum(cost_vector))/m;
+theta_modified = theta.^2;
+theta_modified(1) = 0;
+J =  J + (lambda/(2*m))*(sum(theta_modified));
+diff = (hypothesis-y);
+grad = (1/m)*(diff'*X);
+additional_term = (lambda/m)*theta;
+additional_term(1) = 0;
+grad = grad + additional_term';
 
 
 

@@ -17,6 +17,7 @@ p = zeros(size(X, 1), 1);
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
 %               your learned logistic regression parameters (one-vs-all).
@@ -29,6 +30,15 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
+output = sigmoid(X*all_theta');
+maximum = max(output,[],2);
+for i=1:m,
+  for j=1:num_labels,
+    if output(i,j)==maximum(i)
+      p(i)=j;
+    end;
+  end;
+end;
 
 
 
